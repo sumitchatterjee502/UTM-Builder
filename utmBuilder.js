@@ -1,8 +1,10 @@
-var UTMBUILDER = UTMBUILDER || (function(selector){
+var UTMBUILDER = UTMBUILDER || (function(){
 	
 	const self = {
-		init: function(selector){
+		init: function(selector, refSelector){
 			self.selector = selector;
+			self.refSelector = refSelector;
+			//console.log(self);
 		}
 		,jsonData: {
 			"data" :[
@@ -101,10 +103,10 @@ var UTMBUILDER = UTMBUILDER || (function(selector){
 			var campaignSource = document.getElementById("campaignSource");
 
 			var webUrlData = document.getElementById("websiteUrl");
-			let campaignMediumData = document.getElementById("campaignMedium");
-			let campaignNameData = document.getElementById("campaignName");
-			let campaignTermData = document.getElementById('campaignTerm');
-			let campaignContentData = document.getElementById("campaignContent");
+			var campaignMediumData = document.getElementById("campaignMedium");
+			var campaignNameData = document.getElementById("campaignName");
+			var campaignTermData = document.getElementById('campaignTerm');
+			var campaignContentData = document.getElementById("campaignContent");
 			
 			const validData = {};
 
@@ -121,20 +123,138 @@ var UTMBUILDER = UTMBUILDER || (function(selector){
 				validData.checkUrl = self.validURL(validData.websiteUrl);
 				
 				self.createAndGetUrl(validData);
-				// console.log(websiteUrl);
-				// console.log(checkUrl);
-				// console.log(webUrl);
-				// console.log(campaignSourceData);
-			})	
+			});
+
+			campaignMediumData.addEventListener('input', function(e){
+
+				validData.campaignMedium = e.target.value;
+				validData.campaignSourceData = campaignSource.value;
+				validData.webUrl = webUrlData.value;				
+				validData.campaignName = campaignNameData.value;
+				validData.campaignTerm = campaignTermData.value;
+				validData.campaignContent = campaignContentData.value;
+
+				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
+				validData.checkUrl = self.validURL(validData.websiteUrl);
+				
+				self.createAndGetUrl(validData);
+			});
+
+			campaignNameData.addEventListener('input', function(e){
+
+				validData.campaignName = e.target.value;
+				validData.campaignSourceData = campaignSource.value;
+				validData.webUrl = webUrlData.value;
+				validData.campaignMedium = campaignMediumData.value;	
+				validData.campaignTerm = campaignTermData.value;
+				validData.campaignContent = campaignContentData.value;
+
+				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
+				validData.checkUrl = self.validURL(validData.websiteUrl);
+				
+				self.createAndGetUrl(validData);
+			});
+
+			campaignTermData.addEventListener('input', function(e){
+
+				validData.campaignTerm = e.target.value;
+				validData.campaignSourceData = campaignSource.value;
+				validData.webUrl = webUrlData.value;
+				validData.campaignMedium = campaignMediumData.value;	
+				validData.campaignName = campaignNameData.value;
+				validData.campaignContent = campaignContentData.value;
+
+				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
+				validData.checkUrl = self.validURL(validData.websiteUrl);
+				
+				self.createAndGetUrl(validData);
+			});
+
+			campaignContentData.addEventListener('input', function(e){
+
+				validData.campaignContent = e.target.value;
+				validData.campaignSourceData = campaignSource.value;
+				validData.webUrl = webUrlData.value;
+				validData.campaignMedium = campaignMediumData.value;	
+				validData.campaignName = campaignNameData.value;
+				validData.campaignTerm = campaignTermData.value;
+
+				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
+				validData.checkUrl = self.validURL(validData.websiteUrl);
+				
+				self.createAndGetUrl(validData);
+			});	
 			
 		}
 		,createAndGetUrl: (data)=>{
-			console.log(data)
+			td = self.refSelector;
+			let reSelector = document.getElementById(td);
+
 			if(data.checkUrl){
 				if(data.campaignSourceData){
-
+					if(data.campaignMedium){
+						if(data.campaignName){
+							if(data.campaignTerm){
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_campaign="+data.campaignName+"&utm_term="+data.campaignTerm+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_campaign="+data.campaignName+"&utm_term="+data.campaignTerm;
+								}
+							}else{
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_campaign="+data.campaignName+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_campaign="+data.campaignName;
+								}
+							}
+						}else{
+							if(data.campaignTerm){
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_term="+data.campaignTerm+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_term="+data.campaignTerm;	
+								}
+							}else{
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_medium="+data.campaignMedium;
+								}
+							}
+						}
+					}else{
+						if(data.campaignName){
+							if(data.campaignTerm){
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_campaign="+data.campaignName+"&utm_term="+data.campaignTerm+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_campaign="+data.campaignName+"&utm_term="+data.campaignTerm;
+								}
+							}else{
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_campaign="+data.campaignName+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_campaign="+data.campaignName;
+								}
+							}
+						}else{
+							if(data.campaignTerm){
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_term="+data.campaignTerm+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_term="+data.campaignTerm;	
+								}
+							}else{
+								if(data.campaignContent){
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData+"&utm_content="+data.campaignContent;
+								}else{
+									reSelector.value = data.websiteUrl+"?utm_source="+data.campaignSourceData;
+								}
+							}
+						}
+					}
 				}else{
-					return false;
+					reSelector.value = "";
 				}
 			}else{
 				document.getElementById("websiteUrl").focus();
@@ -144,4 +264,3 @@ var UTMBUILDER = UTMBUILDER || (function(selector){
 
 	return self;
 }());
-
