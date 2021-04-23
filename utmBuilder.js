@@ -130,6 +130,15 @@ var UTMBUILDER = UTMBUILDER || (function(selector){
 		}
 		,createAndGetUrl: (data)=>{
 			console.log(data)
+			if(data.checkUrl){
+				if(data.campaignSourceData){
+
+				}else{
+					return false;
+				}
+			}else{
+				document.getElementById("websiteUrl").focus();
+			}
 		}
 	}
 
