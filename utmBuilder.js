@@ -90,11 +90,9 @@ var UTMBUILDER = UTMBUILDER || (function(){
 			var tempStr = strurl;
 
 			if(strurlData !== '/'){
-
 				tempStr = strurl+'/';
 				return tempStr;
 			}else{
-
 				tempStr = strurl;
 				return tempStr;
 			}
@@ -111,13 +109,13 @@ var UTMBUILDER = UTMBUILDER || (function(){
 			const validData = {};
 
 			campaignSource.addEventListener('input', function(e){
+
 				validData.campaignSourceData = e.target.value;
 				validData.webUrl = webUrlData.value;
 				validData.campaignMedium = campaignMediumData.value;
 				validData.campaignName = campaignNameData.value;
 				validData.campaignTerm = campaignTermData.value;
 				validData.campaignContent = campaignContentData.value;
-
 
 				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
 				validData.checkUrl = self.validURL(validData.websiteUrl);
