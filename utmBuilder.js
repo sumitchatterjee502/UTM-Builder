@@ -106,23 +106,30 @@ var UTMBUILDER = UTMBUILDER || (function(selector){
 			let campaignTermData = document.getElementById('campaignTerm');
 			let campaignContentData = document.getElementById("campaignContent");
 			
+			const validData = {};
+
 			campaignSource.addEventListener('input', function(e){
-				campaignSourceData = e.target.value;
-				webUrl = webUrlData.value;
-				campaignMedium = campaignMediumData.value;
-				campaignName = campaignNameData.value;
-				campaignTerm = campaignTermData.value;
-				campaignContent = campaignContentData.value;
+				validData.campaignSourceData = e.target.value;
+				validData.webUrl = webUrlData.value;
+				validData.campaignMedium = campaignMediumData.value;
+				validData.campaignName = campaignNameData.value;
+				validData.campaignTerm = campaignTermData.value;
+				validData.campaignContent = campaignContentData.value;
 
 
-				var websiteUrl = self.checkLastCharacter(webUrl);
-				let checkUrl = self.validURL(websiteUrl);
-				console.log(websiteUrl);
-				console.log(checkUrl);
-				console.log(webUrl);
-				console.log(campaignSourceData);
+				validData.websiteUrl = self.checkLastCharacter(validData.webUrl);
+				validData.checkUrl = self.validURL(validData.websiteUrl);
+				
+				self.createAndGetUrl(validData);
+				// console.log(websiteUrl);
+				// console.log(checkUrl);
+				// console.log(webUrl);
+				// console.log(campaignSourceData);
 			})	
 			
+		}
+		,createAndGetUrl: (data)=>{
+			console.log(data)
 		}
 	}
 
