@@ -110,7 +110,7 @@ var UTMBUILDER = UTMBUILDER || (function(){
 
 			campaignSource.addEventListener('input', function(e){
 
-				validData.campaignSourceData = e.target.value;
+				validData.campaignSourceData = self.checkSpecialCharacter(e.target.value);
 				validData.webUrl = webUrlData.value;
 				validData.campaignMedium = campaignMediumData.value;
 				validData.campaignName = campaignNameData.value;
@@ -125,7 +125,7 @@ var UTMBUILDER = UTMBUILDER || (function(){
 
 			campaignMediumData.addEventListener('input', function(e){
 
-				validData.campaignMedium = e.target.value;
+				validData.campaignMedium = self.checkSpecialCharacter(e.target.value);
 				validData.campaignSourceData = campaignSource.value;
 				validData.webUrl = webUrlData.value;				
 				validData.campaignName = campaignNameData.value;
@@ -140,7 +140,7 @@ var UTMBUILDER = UTMBUILDER || (function(){
 
 			campaignNameData.addEventListener('input', function(e){
 
-				validData.campaignName = e.target.value;
+				validData.campaignName = self.checkSpecialCharacter(e.target.value);
 				validData.campaignSourceData = campaignSource.value;
 				validData.webUrl = webUrlData.value;
 				validData.campaignMedium = campaignMediumData.value;	
@@ -155,7 +155,7 @@ var UTMBUILDER = UTMBUILDER || (function(){
 
 			campaignTermData.addEventListener('input', function(e){
 
-				validData.campaignTerm = e.target.value;
+				validData.campaignTerm = self.checkSpecialCharacter(e.target.value);
 				validData.campaignSourceData = campaignSource.value;
 				validData.webUrl = webUrlData.value;
 				validData.campaignMedium = campaignMediumData.value;	
@@ -170,7 +170,7 @@ var UTMBUILDER = UTMBUILDER || (function(){
 
 			campaignContentData.addEventListener('input', function(e){
 
-				validData.campaignContent = e.target.value;
+				validData.campaignContent = self.checkSpecialCharacter(e.target.value);
 				validData.campaignSourceData = campaignSource.value;
 				validData.webUrl = webUrlData.value;
 				validData.campaignMedium = campaignMediumData.value;	
@@ -256,6 +256,90 @@ var UTMBUILDER = UTMBUILDER || (function(){
 				}
 			}else{
 				document.getElementById("websiteUrl").focus();
+			}
+		},
+		checkSpecialCharacter: (strData)=>{
+
+			test="";
+			str = strData.slice(0, strData.length);
+
+			for(i = 0; i < str.length; i++){
+				test += self.strReplacer(str[i]);
+			}
+
+			return test ;
+		}
+		,strReplacer: (str)=>{
+			switch(str){
+				case " ":
+					return letter = "%20";
+					break;
+				case "@":
+					return letter = "%40";
+					break;
+				case "#":
+					return letter = "%23";
+					break;
+				case "$":
+					return letter = "%24";
+					break;
+				case "%":
+					return letter = "%25";
+					break;
+				case "^":
+					return letter = "%5E";
+					break;
+				case "&":
+					return letter = "%26";
+					break;
+				case "+":
+					return letter = "%2B";
+					break;
+				case "=":
+					return letter = "%3D";
+					break;
+				case "/":
+					return letter = "%2F";
+					break;
+				case "[":
+					return letter = "%5B";
+					break;
+				case "]":
+					return letter = "%5D";
+					break;
+				case "{":
+					return letter = "%7B";
+					break;
+				case "}":
+					return letter = "%7D";
+					break;
+				case ":":
+					return letter = "%3A";
+					break;
+				case ";":
+					return letter = "%3B";
+					break;
+				case "|":
+					return letter = "%7C";
+					break;
+				case "<":
+					return letter = "%3C";
+					break;
+				case ">":
+					return letter = "%3E";
+					break;
+				case "?":
+					return letter = "%3F";
+					break;
+				case "`":
+					return letter = "%60";
+					break;
+				case ",":
+					return letter = "%2C";
+					break;
+				default:
+					return letter = str;
+					break;
 			}
 		}
 	}
