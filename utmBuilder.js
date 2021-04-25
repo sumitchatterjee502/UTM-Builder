@@ -1,3 +1,11 @@
+/*
+* UtmBuilder Javascript Library v1.0
+* Released under the MIT license
+* https://github.com/sumitchatterjee502/utmBuilder/blob/main/LICENSE
+* Author : Sumit Chatterjee 
+* Date : 16-04-2021
+*/
+
 var UTMBUILDER = UTMBUILDER || (function(){
 	
 	const self = {
