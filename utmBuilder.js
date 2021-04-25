@@ -4,7 +4,6 @@ var UTMBUILDER = UTMBUILDER || (function(){
 		init: function(selector, refSelector){
 			self.selector = selector;
 			self.refSelector = refSelector;
-			//console.log(self);
 		}
 		,jsonData: {
 			"data" :[
