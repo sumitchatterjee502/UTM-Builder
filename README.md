@@ -1,4 +1,4 @@
-# UtmBuilder
+# UTM-Builder
 It is a URL Campaign Builder Tools. <br>
 This tool allows you to easily add campaign parameters to URLs so you can track Custom Campaigns in Google Analytics.<br>
 It is use for Generate custom campaign parameters for your advertising URLs.<br>
